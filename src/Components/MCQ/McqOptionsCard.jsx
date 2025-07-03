@@ -13,16 +13,16 @@ function McqOptionsCard() {
 
             <div className='flex items-center gap-3'>
                 <h1 className='text-sm text-gray-500 my-2'>Option 1</h1>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="red" class="size-5 cursor-pointer hover:scale-120">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1" stroke="red" className="size-5 cursor-pointer hover:scale-120">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
 
             </div>
 
             <div className='flex gap-4' >
-                <label class="inline-flex items-center cursor-pointer">
-                    <input onClick={TogglesetIsAnswer} type="checkbox" value="" class="sr-only peer" />
-                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none  rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#71C9CE] "></div>
+                <label className="inline-flex items-center cursor-pointer">
+                    <input onClick={TogglesetIsAnswer} type="checkbox" value="" className="sr-only peer" />
+                    <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none  rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#71C9CE] "></div>
                 </label>
 
                 <div className='w-full'>
