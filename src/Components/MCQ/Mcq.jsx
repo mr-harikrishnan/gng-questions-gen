@@ -4,6 +4,8 @@ import McqOptionsCard from './McqOptionsCard'
 
 function Mcq({ formik }) {
 
+    const [correctAnswer, setCorrectAnswer] = useState(0)
+
     const addOption = () => {
         if (formik.values.options.length == 0) {
             const newOptions = [...formik.values.options, {
@@ -47,7 +49,7 @@ function Mcq({ formik }) {
             <div className='grid md:grid-cols-2 gap-6'>
 
                 {formik.values.options.map((opt, index) => (
-                    <McqOptionsCard key={index} formik={formik} index={index}></McqOptionsCard>
+                    <McqOptionsCard key={index} formik={formik} index={index} correctAnswer={correctAnswer} setCorrectAnswer={setCorrectAnswer}></McqOptionsCard>
                 ))}
 
             </div>
