@@ -7,7 +7,7 @@ function DragAndDrop({ formik }) {
 
     const onDrop = useCallback((acceptedFiles) => {
         const file = acceptedFiles[0];
-        formik.setFieldValue("image", file);
+        formik.setFieldValue("image", URL.createObjectURL(file));
         setPreview(URL.createObjectURL(file));
         
     }, [formik]);
@@ -34,7 +34,7 @@ function DragAndDrop({ formik }) {
                         }`}
                 >
                     <input {...getInputProps()} />
-                    <p className="text-sm text-gray-500">📂 Drag & Drop or Click to Upload</p>
+                    <p className="text-sm text-gray-500">Drag & Drop or Click to Upload</p>
                 </div>
             )}
 

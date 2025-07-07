@@ -3,11 +3,31 @@ import Mcq from './Components/MCQ/Mcq'
 import { Formik, useFormik } from 'formik'
 import CodeEditor from './Components/Code-Editor/CodeEditor'
 import DragAndDrop from './Components/Drag-And-Drop/DragAndDrop'
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
 
 
 function App() {
+
+  const subjectsArray = [
+    {
+      subject: "Science",
+      topics: ["Physics", "Chemistry", "Biology"]
+    },
+    {
+      subject: "Programming",
+      topics: ["Variables", "Functions", "Loops"]
+    },
+    {
+      subject: "Problem Solving",
+      topics: ["Patterns", "Recursion", "Algorithms"]
+    }
+  ];
+
   const [showEditor, setShowEditor] = useState(false)
   const [code, setCode] = useState("Write your Code...")
+  const [subject, setSubject] = useState("science")
+  const [topics, setTopics] = useState(["Physics", "Chemistry", "Biology"])
+  const [optionComponent, setoptionComponent] = useState("mcq")
 
 
   const formik = useFormik({
@@ -17,30 +37,62 @@ function App() {
       code: code,
       subject: "",
       topic: "",
-      options: [
-        {
-          option: "",
-          mark: 0,
-          isCorrect: false
-        },
-        {
-          option: "",
-          mark: 0,
-          isCorrect: false
-        }
-      ],
+      options: [],
       explanation: "",
       tags: []
     },
     validate: (values) => {
       let error = {}
 
+      if (!values.question) {
+        error.question = "Please enter question"
+      }
 
+      if (values.question.length < 5) {
+        error.question = "Please enter minimum 5 letters"
+      }
+
+
+
+      return error;
+
+    },
+    onSubmit: (values) => {
+      console.log(values)
     }
 
 
 
   })
+
+
+  const setTopicSelectedSubject = (value) => {
+    subjectsArray.map((sub, index) => {
+      if (sub.subject == value) {
+        setTopics([...sub.topics])
+
+
+      }
+
+    })
+
+
+  }
+
+
+  const onSetoptionComponent = (option) => {
+    setoptionComponent(option)
+  }
+
+
+
+
+
+
+
+
+
+
 
   return (
     <div className='h-sfull w-full bg-[#f2f9f9] '>
@@ -72,8 +124,8 @@ function App() {
         </div>
 
         {/* CHOOSE FILE */}
-        <DragAndDrop formik={formik}></DragAndDrop>
 
+        <DragAndDrop formik={formik}></DragAndDrop>
 
 
         {/* ADD CODE */}
@@ -99,7 +151,15 @@ function App() {
 
           <div className='w-full'>
             <label className='text-sm text-gray-500 my-2' >Subject </label>
-            <select name="" id="" className='appearance-none border w-full text-sm text-gray-500 items-center justify-center  px-4 my-2 py-3 bg-[#ebf8f8]  border-gray-400 rounded-lg cursor-pointer hover:bg-[#d3f0f3] transition'>
+            <select
+              onChange={(e) => {
+                setTopicSelectedSubject(e.target.value)
+              }}
+              name="" id="" className='appearance-none border w-full text-sm text-gray-500 items-center justify-center  px-4 my-2 py-3 bg-[#ebf8f8]  border-gray-400 rounded-lg cursor-pointer hover:bg-[#d3f0f3] transition'>
+              <option disabled >Select Subject</option>
+              {subjectsArray.map((sub, index) => {
+                return <option key={index} value={sub.subject}>{sub.subject}</option>
+              })}
             </select>
           </div>
 
@@ -109,17 +169,25 @@ function App() {
           <div className='w-full'>
             <label className='text-sm text-gray-500 my-2' >Topics </label>
             <select name="" id="" className='appearance-none border w-full text-sm text-gray-500 items-center justify-center  px-4 my-2 py-3 bg-[#ebf8f8]  border-gray-400 rounded-lg cursor-pointer hover:bg-[#d3f0f3] transition'>
+              <option disabled >Select Topic</option>
+              {topics.map((top, index) => {
+                return <option key={index} value={top}>{top}</option>
+              })}
             </select>
           </div>
 
         </div>
+
 
         {/* CHOOSE CHOISES */}
 
 
         <div>
 
-          <Mcq></Mcq>
+          {optionComponent == "mcq" ? <Mcq formik={formik} ></Mcq> : null}
+          {optionComponent == "msq" }
+          {optionComponent == "mcqImage" }
+          {optionComponent == "msqImage" }
 
         </div>
 
@@ -147,18 +215,18 @@ function App() {
 
 
 
-      {/* NAVIGATE ROUTES */}
+      {/* NAVIGATE */}
 
 
       <div className='fixed z-60 top-60 right-3  p-4 rounded-lg flex flex-col gap-4'>
 
-        <img src="/src/assets/MCQ.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
+        <img onClick={() => { onSetoptionComponent("mcq") }} src="/src/assets/MCQ.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
 
-        <img src="/src/assets//MSQ.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
+        <img onClick={() => { onSetoptionComponent("msq") }} src="/src/assets//MSQ.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
 
-        <img src="/src/assets/MCQI.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
+        <img onClick={() => { onSetoptionComponent("mcqImagae") }} src="/src/assets/MCQI.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
 
-        <img src="/src/assets//MSQI.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
+        <img onClick={() => { onSetoptionComponent("msqImage") }} src="/src/assets//MSQI.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
 
       </div>
 
