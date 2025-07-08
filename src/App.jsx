@@ -35,8 +35,8 @@ function App() {
       question: "",
       image: null,
       code: code,
-      subject: "",
-      topic: "",
+      subject: `${subjectsArray[0].subject}`,
+      topic: `${subjectsArray[0].topics[0]}`,
       options: [],
       explanation: "",
       tags: []
@@ -51,7 +51,22 @@ function App() {
         errors.question = "Please enter minimum 5 letters"
       }
 
-      // Validate options
+      // explanation 
+      if (!values.explanation) {
+        errors.explanation = "Please enter explanation"
+      } else if (values.explanation.length < 5) {
+        errors.explanation = "Please enter minimum 5 letters"
+      }
+
+      // Tags
+      if (!values.tags) {
+        errors.tags = "Please enter tags"
+      } else if (values.tags.length < 5) {
+        errors.tags = "Please enter minimum 5 letters"
+      }
+
+
+      // Validate 
       const optionErrors = []
       values.options.forEach((opt, idx) => {
         const optErr = {}
@@ -106,7 +121,7 @@ function App() {
 
 
   return (
-    <div className='h-sfull w-full bg-[#f2f9f9] '>
+    <div className='h-full w-full bg-[#f2f9f9] '>
 
       {/* HEADLINE */}
       <div >
@@ -115,8 +130,8 @@ function App() {
 
 
       {/* QUESTION */}
-      <form className='px-12 pe-24 p-4' onSubmit={formik.handleSubmit}>
-        <div className='px-12 pe-24 p-4'>
+      <form className=' pe-24 p-4' onSubmit={formik.handleSubmit}>
+        <div className=' p-4'>
 
           <div className='flex flex-col my-2'>
             <label className='text-sm text-gray-500 my-2 ' >Question </label>
@@ -167,6 +182,7 @@ function App() {
                 onChange={(e) => {
                   formik.handleChange(e)
                   setTopicSelectedSubject(e.target.value)
+                  formik.setFieldValue('subject', e.target.value)
                 }}
                 name="" id="" className='appearance-none border w-full text-sm text-gray-500 items-center justify-center  px-4 my-2 py-3 bg-[#ebf8f8]  border-gray-400 rounded-lg cursor-pointer hover:bg-[#d3f0f3] transition'>
                 <option disabled >Select Subject</option>
@@ -181,7 +197,12 @@ function App() {
 
             <div className='w-full'>
               <label className='text-sm text-gray-500 my-2' >Topics </label>
-              <select name="" id="" className='appearance-none border w-full text-sm text-gray-500 items-center justify-center  px-4 my-2 py-3 bg-[#ebf8f8]  border-gray-400 rounded-lg cursor-pointer hover:bg-[#d3f0f3] transition'>
+              <select
+                onChange={(e) => {
+                  formik.setFieldValue('topic', e.target.value)
+
+                }}
+                name="" id="" className='appearance-none border w-full text-sm text-gray-500 items-center justify-center  px-4 my-2 py-3 bg-[#ebf8f8]  border-gray-400 rounded-lg cursor-pointer hover:bg-[#d3f0f3] transition'>
                 <option disabled >Select Topic</option>
                 {topics.map((top, index) => {
                   return <option key={index} value={top}>{top}</option>
@@ -208,13 +229,34 @@ function App() {
 
           <div className='flex flex-col my-2'>
             <label className='text-sm text-gray-500 my-2' >Explanation</label>
-            <input type="text" className='border-1 h-20 rounded-lg border-gray-400 bg-[#ebf8f8] hover:bg-[#d3f0f3]' />
+            <input
+              name='explanation'
+              value={formik.values.explanation}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              type="text"
+              placeholder='Add your exlanations'
+              className='border-1 h-20 pl-2 rounded-lg placeholder-gray-400 border-gray-400 bg-[#ebf8f8] hover:bg-[#d3f0f3]'
+            />
+            {formik.touched.explanation && formik.errors.explanation && (
+              <span className="text-red-500 text-sm">{formik.errors.explanation}</span>
+            )}
           </div>
 
           {/* TAG*/}
           <div className='flex flex-col my-2'>
             <label className='text-sm text-gray-500 my-2' >Tag</label>
-            <input type="text" className='border-1 h-9 rounded-lg border-gray-400 bg-[#ebf8f8] hover:bg-[#d3f0f3]' />
+            <input
+              name='tags'
+              value={formik.values.tags}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur} type="text"
+              placeholder='Add your tags'
+              className='border-1 pl-2 h-9  placeholder-gray-400 rounded-lg border-gray-400 bg-[#ebf8f8] hover:bg-[#d3f0f3]'
+            />
+            {formik.touched.tags && formik.errors.tags && (
+              <span className="text-red-500 text-sm">{formik.errors.tags}</span>
+            )}
           </div>
 
           {/* SUBMIT BTN */}

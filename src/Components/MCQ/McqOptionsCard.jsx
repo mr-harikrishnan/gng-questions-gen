@@ -8,7 +8,13 @@ function McqOptionsCard({ formik, index, correctAnswer, setCorrectAnswer }) {
         const optionsData = [...formik.values.options]
         optionsData.splice(idx, 1)
         formik.setFieldValue(`options`, optionsData)
+
+        if(idx == correctAnswer){
+            setCorrectAnswer(0)
+        }
     }
+
+    
 
     return (
         <div>
@@ -54,7 +60,7 @@ function McqOptionsCard({ formik, index, correctAnswer, setCorrectAnswer }) {
 
 
                 <div className='w-14 h-12 appearance-none border text-md text-gray-500 flex items-center justify-center   my-2  bg-[#ebf8f8]  border-gray-400 rounded-lg cursor-pointer hover:bg-[#d3f0f3] transition'>
-                    {correctAnswer == index ? 10 : 0}
+                    {formik.values.options[index].mark}
                 </div>
             </div>
 

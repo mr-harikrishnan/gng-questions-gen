@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import McqOptionsCard from './McqOptionsCard'
 
 
 function Mcq({ formik }) {
 
     const [correctAnswer, setCorrectAnswer] = useState(0)
+
+
+
 
     const addOption = () => {
         if (formik.values.options.length == 0) {
@@ -30,6 +33,20 @@ function Mcq({ formik }) {
         }
 
     }
+
+    useEffect(() => {
+        const updatedOptions = formik.values.options.map((opt, idx) => ({
+            ...opt,
+            isCorrect: idx === correctAnswer,
+            mark:idx === correctAnswer ? 10 :0
+
+        }));
+        formik.setFieldValue("options", updatedOptions);
+
+
+        
+    }, [correctAnswer]);
+
 
     return (
         <div>
