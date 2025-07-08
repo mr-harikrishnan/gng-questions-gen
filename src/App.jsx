@@ -4,6 +4,8 @@ import { Formik, useFormik } from 'formik'
 import CodeEditor from './Components/Code-Editor/CodeEditor'
 import DragAndDrop from './Components/Drag-And-Drop/DragAndDrop'
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
+import Msq from './Components/MSQ/Msq'
+import McqImage from './Components/MCQI/McqImage'
 
 
 function App() {
@@ -219,9 +221,9 @@ function App() {
           <div>
 
             {optionComponent == "mcq" ? <Mcq formik={formik} ></Mcq> : null}
-            {optionComponent == "msq"}
-            {optionComponent == "mcqImage"}
-            {optionComponent == "msqImage"}
+            {optionComponent == "msq" ? <Msq formik={formik}></Msq> :null}
+            {optionComponent == "mcqImage" ? <McqImage formik={formik}></McqImage> :null}
+            {optionComponent == "msqImage" ? <MsqImage formik={formik}></MsqImage> :null}
 
           </div>
 
@@ -283,7 +285,7 @@ function App() {
 
         <img onClick={() => { onSetoptionComponent("msq") }} src="/src/assets//MSQ.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
 
-        <img onClick={() => { onSetoptionComponent("mcqImagae") }} src="/src/assets/MCQI.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
+        <img onClick={() => { onSetoptionComponent("mcqImage") }} src="/src/assets/MCQI.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
 
         <img onClick={() => { onSetoptionComponent("msqImage") }} src="/src/assets//MSQI.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
 
