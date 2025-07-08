@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import DragAndDrop from '../Drag-And-Drop/DragAndDrop'
+import OptionsDragAndDrop from '../Drag-And-Drop/OptionsDragAndDrop'
 
 function McqImageOptionsCard({ formik, index, correctAnswer, setCorrectAnswer }) {
 
@@ -33,7 +34,7 @@ function McqImageOptionsCard({ formik, index, correctAnswer, setCorrectAnswer })
 
 
 
-            <div className='flex gap-4 items-center' >
+            <div className='flex gap-4 items-center ju' >
                 <div
                     onClick={() => { setCorrectAnswer(index) }}
                     className={`${correctAnswer === index
@@ -42,12 +43,12 @@ function McqImageOptionsCard({ formik, index, correctAnswer, setCorrectAnswer })
                     <div className='border border-gray-300 bg-white h-5.5 w-5.5 rounded-3xl ml-1 '></div>
 
                 </div>
-                <div className='w-full'>
-                    <div className="appearance-none border w-full text-sm text-gray-500 items-center justify-center  px-4 my-2 py-3 bg-[#ebf8f8]  border-gray-400 rounded-lg cursor-pointer hover:bg-[#d3f0f3] transition"
-                    >
-                        <DragAndDrop></DragAndDrop>
-                    </div>
 
+                <div className='w-full'>
+                    
+                    <div className="">
+                        <OptionsDragAndDrop formik={formik}></OptionsDragAndDrop>
+                    </div>
 
                     {formik.touched.options?.[index]?.option && formik.errors.options?.[index]?.option && (
                         <span className="text-red-500 text-sm">{formik.errors.options[index].option}</span>
@@ -68,16 +69,3 @@ function McqImageOptionsCard({ formik, index, correctAnswer, setCorrectAnswer })
 }
 
 export default McqImageOptionsCard
-
-
-
-
-
-
-
-
-
-
-
-
-

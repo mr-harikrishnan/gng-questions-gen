@@ -1,11 +1,14 @@
-import React from 'react'
-import { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import McqImageOptionsCard from './McqImageOptionsCard';
+
 
 
 function McqImage({ formik }) {
 
     const [correctAnswer, setCorrectAnswer] = useState(0)
+
+
+
 
     const addOption = () => {
         if (formik.values.options.length == 0) {
