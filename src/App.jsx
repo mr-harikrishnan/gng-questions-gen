@@ -42,21 +42,37 @@ function App() {
       tags: []
     },
     validate: (values) => {
-      let error = {}
+      let errors = {}
 
+      // Validate question
       if (!values.question) {
-        error.question = "Please enter question"
+        errors.question = "Please enter question"
+      } else if (values.question.length < 5) {
+        errors.question = "Please enter minimum 5 letters"
       }
 
-      if (values.question.length < 5) {
-        error.question = "Please enter minimum 5 letters"
+      // Validate options
+      const optionErrors = []
+      values.options.forEach((opt, idx) => {
+        const optErr = {}
+        if (!opt.option || opt.option.trim() === "") {
+          optErr.option = "Please enter option"
+        } else if (opt.option.trim().length < 1) {
+          optErr.option = "Minimum 1 character"
+        }
+
+        optionErrors.push(optErr)
+      })
+
+      // Check if any option has error
+      const hasOptionError = optionErrors.some(err => Object.keys(err).length > 0)
+      if (hasOptionError) {
+        errors.options = optionErrors
       }
 
-
-
-      return error;
-
-    },
+      return errors
+    }
+    ,
     onSubmit: (values) => {
       console.log(values)
     }
@@ -89,11 +105,6 @@ function App() {
 
 
 
-
-
-
-
-
   return (
     <div className='h-sfull w-full bg-[#f2f9f9] '>
 
@@ -108,14 +119,15 @@ function App() {
         <div className='px-12 pe-24 p-4'>
 
           <div className='flex flex-col my-2'>
-            <label className='text-sm text-gray-500 my-2' >Question </label>
+            <label className='text-sm text-gray-500 my-2 ' >Question </label>
             <input
               type="text"
               name='question'
               value={formik.values.question}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              className='border-1 h-20 rounded-lg border-gray-400 bg-[#ebf8f8] hover:bg-[#d3f0f3]'
+              placeholder='Write Your Question'
+              className='border-1 h-20 rounded-lg pl-2 placeholder-gray-400 border-gray-400 bg-[#ebf8f8] hover:bg-[#d3f0f3]'
 
             />
             {formik.touched.question && formik.errors.question && (
@@ -153,6 +165,7 @@ function App() {
               <label className='text-sm text-gray-500 my-2' >Subject </label>
               <select
                 onChange={(e) => {
+                  formik.handleChange(e)
                   setTopicSelectedSubject(e.target.value)
                 }}
                 name="" id="" className='appearance-none border w-full text-sm text-gray-500 items-center justify-center  px-4 my-2 py-3 bg-[#ebf8f8]  border-gray-400 rounded-lg cursor-pointer hover:bg-[#d3f0f3] transition'>
