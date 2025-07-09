@@ -58,7 +58,7 @@ function McqImageOptionsCard({ formik, index, correctAnswer, setCorrectAnswer })
                 </div>
 
 
-                <div className='w-14 h-12 appearance-none border text-md text-gray-500 flex items-center justify-center   my-2  bg-[#ebf8f8]  border-gray-400 rounded-lg cursor-pointer hover:bg-[#d3f0f3] transition'>
+                <div className='md:w-12 h-12 appearance-none border text-md text-gray-500 flex items-center justify-center   my-2  bg-[#ebf8f8]  border-gray-400 rounded-lg cursor-pointer hover:bg-[#d3f0f3] transition'>
                     {formik.values.options[index].mark}
                 </div>
             </div>
