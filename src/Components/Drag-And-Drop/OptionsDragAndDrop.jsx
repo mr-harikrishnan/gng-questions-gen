@@ -7,10 +7,12 @@ function OptionsDragAndDrop({ formik, index }) {
 
     const onDrop = useCallback((acceptedFiles) => {
         const file = acceptedFiles[0];
-        formik.setFieldValue(`options${[index]}.optionImageUrl`, URL.createObjectURL(file));
+        formik.setFieldValue(`options[${index}].optionImageUrl`, URL.createObjectURL(file));
         setPreview(URL.createObjectURL(file));
 
     }, [formik]);
+
+
 
     const handleRemove = () => {
         formik.setFieldValue("image", null);
@@ -28,6 +30,7 @@ function OptionsDragAndDrop({ formik, index }) {
             {/* Show drag-drop only when no image */}
             {!preview && (
                 <div
+
                     {...getRootProps()}
                     className={`flex flex-col  items-center justify-center w-full px-4 h-12 border-2 border-dashed rounded-lg cursor-pointer transition ${isDragActive
                         ? 'border-blue-400 bg-blue-50'
@@ -65,10 +68,7 @@ function OptionsDragAndDrop({ formik, index }) {
                 </div>
             )}
 
-            {/* Error */}
-            {formik.touched.image && formik.errors.image && (
-                <span className="text-red-500 text-sm">{formik.errors.image}</span>
-            )}
+
         </div>
 
     );

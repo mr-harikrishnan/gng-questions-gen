@@ -29,7 +29,7 @@ function App() {
   const [code, setCode] = useState("Write your Code...")
   const [subject, setSubject] = useState("science")
   const [topics, setTopics] = useState(["Physics", "Chemistry", "Biology"])
-  const [optionComponent, setoptionComponent] = useState("mcq")
+
 
 
   const formik = useFormik({
@@ -40,6 +40,7 @@ function App() {
       subject: `${subjectsArray[0].subject}`,
       topic: `${subjectsArray[0].topics[0]}`,
       options: [],
+      questionsType:"msq",
       explanation: "",
       tags: []
     },
@@ -71,28 +72,33 @@ function App() {
       const optionErrors = []
 
       values.options.forEach((opt, idx) => {
-        const optErr = {}
 
-        // Text Option Validation
-        if (!opt.option || opt.option.trim() === "") {
-          optErr.option = "Please enter option"
-        } else if (opt.option.trim().length < 1) {
-          optErr.option = "Minimum 1 character"
+        if (values.options[0].option === "") {
+          const optErr = {}
+          if (!opt.option || opt.option.trim() === "") {
+            optErr.option = "Please enter option"
+          } else if (opt.option.trim().length < 1) {
+            optErr.option = "Minimum 1 character"
+          }
+          optionErrors.push(optErr)
         }
 
-        // Image Option Validation
-        if (!opt.optionImageUrl || opt.optionImageUrl.trim() === "") {
-          optErr.optionImageUrl = "Please add image in your options"
+        // optionImageUrl
+        if (values.options[0].optionImageUrl === "") {
+          const optErr = {}
+          if (!opt.optionImageUrl || opt.optionImageUrl.trim() === "") {
+            optErr.optionImageUrl = "Please add image in options"
+          }
+          optionErrors.push(optErr)
         }
 
-        optionErrors.push(optErr)
       })
 
       const hasOptionError = optionErrors.some(err => Object.keys(err).length > 0)
       if (hasOptionError) {
         errors.options = optionErrors
       }
-
+      console.log(errors)
       return errors
 
     }
@@ -119,14 +125,7 @@ function App() {
 
   }
 
-
-  const onSetoptionComponent = (option) => {
-    setoptionComponent(option)
-  }
-
-
-
-
+  
 
 
   return (
@@ -227,10 +226,10 @@ function App() {
 
           <div>
 
-            {optionComponent == "mcq" ? <Mcq formik={formik} ></Mcq> : null}
-            {optionComponent == "msq" ? <Msq formik={formik}></Msq> : null}
-            {optionComponent == "mcqImage" ? <McqImage formik={formik}></McqImage> : null}
-            {optionComponent == "msqImage" ? <MsqImage formik={formik}></MsqImage> : null}
+            {formik.values.questionsType == "mcq" ? <Mcq formik={formik} ></Mcq> : null}
+            {formik.values.questionsType == "msq" ? <Msq formik={formik}></Msq> : null}
+            {formik.values.questionsType == "mcqImage" ? <McqImage formik={formik}></McqImage> : null}
+            {formik.values.questionsType == "msqImage" ? <MsqImage formik={formik}></MsqImage> : null}
 
           </div>
 
@@ -288,13 +287,13 @@ function App() {
 
       <div className='fixed z-60 top-60 right-1  p-4 rounded-lg flex flex-col gap-4'>
 
-        <img onClick={() => { onSetoptionComponent("mcq") }} src="/src/assets/MCQ.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
+        <img onClick={() => { formik.setFieldValue("questionsType","mcq") }} src="/src/assets/MCQ.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
 
-        <img onClick={() => { onSetoptionComponent("msq") }} src="/src/assets//MSQ.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
+        <img onClick={() => { formik.setFieldValue("questionsType","msq")}} src="/src/assets//MSQ.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
 
-        <img onClick={() => { onSetoptionComponent("mcqImage") }} src="/src/assets/MCQI.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
+        <img onClick={() => {  formik.setFieldValue("questionsType","mcqImage")}} src="/src/assets/MCQI.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
 
-        <img onClick={() => { onSetoptionComponent("msqImage") }} src="/src/assets//MSQI.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
+        <img onClick={() => { formik.setFieldValue("questionsType","msqImage")}} src="/src/assets//MSQI.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
 
       </div>
 

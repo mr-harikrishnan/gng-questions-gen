@@ -47,11 +47,11 @@ function McqImageOptionsCard({ formik, index, correctAnswer, setCorrectAnswer })
                 <div className='w-full'>
                     
                     <div className="">
-                        <OptionsDragAndDrop formik={formik} ></OptionsDragAndDrop>
+                        <OptionsDragAndDrop formik={formik} index={index}></OptionsDragAndDrop>
                     </div>
 
-                    {formik.touched.options?.[index]?.option && formik.errors.options?.[index]?.option && (
-                        <span className="text-red-500 text-sm">{formik.errors.options[index].option}</span>
+                    {formik.touched.options?.[index]?.optionImageUrl && formik.errors.options?.[index]?.optionImageUrl && (
+                        <span className="text-red-500 text-sm">{formik.errors.options[index].optionImageUrl}</span>
                     )}
 
 
