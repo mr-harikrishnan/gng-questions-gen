@@ -14,11 +14,11 @@ function MsqOptionsCard({ formik, index, correctAnswer, setCorrectAnswer }) {
         setCorrectAnswer(updatedCorrect);
     };
 
-    const toggleCorrectAnswer = (i) => {
-        if (correctAnswer.includes(i)) {
+    const toggleCorrectAnswer = (idx) => {
+        if (correctAnswer.includes(idx)) {
             setCorrectAnswer(correctAnswer.filter(ans => ans !== i));
         } else {
-            setCorrectAnswer([...correctAnswer, i]);
+            setCorrectAnswer([...correctAnswer, idx]);
         }
     };
 

@@ -6,6 +6,7 @@ import DragAndDrop from './Components/Drag-And-Drop/DragAndDrop'
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
 import Msq from './Components/MSQ/Msq'
 import McqImage from './Components/MCQI/McqImage'
+import MsqImage from './Components/MSQI/MsqImage'
 
 
 function App() {

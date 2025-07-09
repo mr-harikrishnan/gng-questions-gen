@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import MsqOptionsCard from './MsqOptionsCard';
+import MsqImageOptionsCard from './MsqImageOptionsCard';
 
-function Msq({ formik }) {
-    const [correctAnswer, setCorrectAnswer] = useState([0]);
+
+
+function MsqImage({ formik }) {
+
+    const [correctAnswer, setCorrectAnswer] = useState([0])
+
 
     const addOption = () => {
         if (formik.values.options.length == 0) {
             const newOptions = [...formik.values.options, {
-                option: "",
-                mark: 0,
+                optionImageUrl: "",
+                mark: 10,
                 isCorrect: false
             }, {
-                option: "",
+                optionImageUrl: "",
                 mark: 0,
                 isCorrect: false
             }];
@@ -20,7 +24,7 @@ function Msq({ formik }) {
         }
         else {
             const newOptions = [...formik.values.options, {
-                option: "",
+                optionImageUrl: "",
                 mark: 0,
                 isCorrect: false
             }];
@@ -32,26 +36,35 @@ function Msq({ formik }) {
     useEffect(() => {
         const updatedOptions = formik.values.options.map((opt, idx) => ({
             ...opt,
-            isCorrect: correctAnswer.includes(idx),
-            mark: correctAnswer.includes(idx) ? 10 : 0
+            isCorrect: idx === correctAnswer,
+            mark: idx === correctAnswer ? 10 : 0
+
         }));
         formik.setFieldValue("options", updatedOptions);
+
+
+
     }, [correctAnswer]);
 
-    return (
 
+    return (
         <div>
-            <h1 className='text-sm text-gray-500 my-2'>MSQ type options</h1>
-            <div className='flex justify-end'>
-                <svg onClick={addOption} xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 24 24" strokeWidth="1.5" stroke="gray" className="size-6 cursor-pointer hover:scale-120">
+            <h1 className='text-sm font-semibold text-gray-500 my-2'>MSQ type image option</h1>
+
+            <div
+
+                className='flex justify-end'>
+                <svg
+                    onClick={() => {
+                        addOption()
+                    }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="gray" className="size-6 cursor-pointer hover:scale-120">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
             </div>
 
-            <div className='grid md:grid-cols-2 gap-6'>
+            <div className="grid lg:grid-cols-2 gap-6">
                 {formik.values.options.map((opt, index) => (
-                    <MsqOptionsCard
+                    <MsqImageOptionsCard
                         key={index}
                         formik={formik}
                         index={index}
@@ -60,9 +73,11 @@ function Msq({ formik }) {
                     />
                 ))}
             </div>
-        </div>
 
+
+
+        </div>
     )
 }
 
-export default Msq
+export default MsqImage

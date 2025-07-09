@@ -13,7 +13,7 @@ function Mcq({ formik }) {
         if (formik.values.options.length == 0) {
             const newOptions = [...formik.values.options, {
                 option: "",
-                mark: 0,
+                mark: 10,
                 isCorrect: false
             }, {
                 option: "",
