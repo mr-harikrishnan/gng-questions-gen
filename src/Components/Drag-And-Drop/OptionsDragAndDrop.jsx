@@ -2,12 +2,12 @@
 import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 
-function OptionsDragAndDrop({ formik }) {
+function OptionsDragAndDrop({ formik, index }) {
     const [preview, setPreview] = useState(null);
 
     const onDrop = useCallback((acceptedFiles) => {
         const file = acceptedFiles[0];
-        formik.setFieldValue("image", URL.createObjectURL(file));
+        formik.setFieldValue(`options${[index]}.optionImageUrl`, URL.createObjectURL(file));
         setPreview(URL.createObjectURL(file));
 
     }, [formik]);
@@ -35,34 +35,30 @@ function OptionsDragAndDrop({ formik }) {
                         }`}
                 >
                     <input {...getInputProps()} />
-                    <p className="text-sm text-gray-500">Drag & Drop or Click to Upload</p>
+                    <p className="text-[0.6rem] md:text-sm text-gray-500">Drag & Drop or Click to Upload</p>
                 </div>
             )}
 
             {/* Show preview when image is uploaded */}
             {preview && (
-                <div className="flex items-center gap-4 p-3 mt-3 rounded-lg bg-white shadow-md  border border-gray-200">
+                <div className="flex items-center w-70 sm:w-full p-2   rounded-lg bg-white shadow-md   border-gray-200">
                     <img src={preview} alt="Preview" className="w-20 h-20 object-cover rounded-md" />
 
                     <div className="flex flex-col flex-1 overflow-hidden">
-                        <p className="text-xs text-gray-600 max-w-[100px] truncate">{preview}</p>
+                        <p className="text-xs text-gray-600 max-w-[280px] truncate">{preview}</p>
                     </div>
 
                     <button
-                        onClick={handleRemove}
+
                         type="button"
                         className="p-1 rounded-full hover:bg-red-100 transition"
                         title="Remove">
 
                         <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="red"
-                            className="w-5 h-5 hover:scale-125 transition-transform">
+                            onClick={handleRemove}
 
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            className={` size-5 cursor-pointer hover:scale-120`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1" stroke="red">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
 
                     </button>

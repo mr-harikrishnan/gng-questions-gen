@@ -68,26 +68,33 @@ function App() {
       }
 
 
-      // Validate 
       const optionErrors = []
+
       values.options.forEach((opt, idx) => {
         const optErr = {}
+
+        // Text Option Validation
         if (!opt.option || opt.option.trim() === "") {
           optErr.option = "Please enter option"
         } else if (opt.option.trim().length < 1) {
           optErr.option = "Minimum 1 character"
         }
 
+        // Image Option Validation
+        if (!opt.optionImageUrl || opt.optionImageUrl.trim() === "") {
+          optErr.optionImageUrl = "Please add image in your options"
+        }
+
         optionErrors.push(optErr)
       })
 
-      // Check if any option has error
       const hasOptionError = optionErrors.some(err => Object.keys(err).length > 0)
       if (hasOptionError) {
         errors.options = optionErrors
       }
 
       return errors
+
     }
     ,
     onSubmit: (values) => {
@@ -132,7 +139,7 @@ function App() {
 
 
       {/* QUESTION */}
-      <form className=' pe-24 p-4' onSubmit={formik.handleSubmit}>
+      <form className=' pr-14 p-4' onSubmit={formik.handleSubmit}>
         <div className=' p-4'>
 
           <div className='flex flex-col my-2'>
@@ -221,9 +228,9 @@ function App() {
           <div>
 
             {optionComponent == "mcq" ? <Mcq formik={formik} ></Mcq> : null}
-            {optionComponent == "msq" ? <Msq formik={formik}></Msq> :null}
-            {optionComponent == "mcqImage" ? <McqImage formik={formik}></McqImage> :null}
-            {optionComponent == "msqImage" ? <MsqImage formik={formik}></MsqImage> :null}
+            {optionComponent == "msq" ? <Msq formik={formik}></Msq> : null}
+            {optionComponent == "mcqImage" ? <McqImage formik={formik}></McqImage> : null}
+            {optionComponent == "msqImage" ? <MsqImage formik={formik}></MsqImage> : null}
 
           </div>
 
@@ -279,7 +286,7 @@ function App() {
       {/* NAVIGATE */}
 
 
-      <div className='fixed z-60 top-60 right-3  p-4 rounded-lg flex flex-col gap-4'>
+      <div className='fixed z-60 top-60 right-1  p-4 rounded-lg flex flex-col gap-4'>
 
         <img onClick={() => { onSetoptionComponent("mcq") }} src="/src/assets/MCQ.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
 

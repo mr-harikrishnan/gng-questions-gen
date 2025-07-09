@@ -34,12 +34,12 @@ function McqImageOptionsCard({ formik, index, correctAnswer, setCorrectAnswer })
 
 
 
-            <div className='flex gap-4 items-center ju' >
+            <div className='flex md:items-center flex-col gap-2 md:flex-row' >
                 <div
                     onClick={() => { setCorrectAnswer(index) }}
                     className={`${correctAnswer === index
                         ? "bg-[#71C9CE] justify-end"
-                        : "bg-gray-200 justify-start"} border flex items-center border-gray-100 h-7 rounded-3xl min-w-12 py-1`}>
+                        : "bg-gray-200 justify-start"} border flex items-center border-gray-100 h-7 rounded-3xl max-w-12 md:min-w-12 py-1`}>
                     <div className='border border-gray-300 bg-white h-5.5 w-5.5 rounded-3xl ml-1 '></div>
 
                 </div>
@@ -47,7 +47,7 @@ function McqImageOptionsCard({ formik, index, correctAnswer, setCorrectAnswer })
                 <div className='w-full'>
                     
                     <div className="">
-                        <OptionsDragAndDrop formik={formik}></OptionsDragAndDrop>
+                        <OptionsDragAndDrop formik={formik} ></OptionsDragAndDrop>
                     </div>
 
                     {formik.touched.options?.[index]?.option && formik.errors.options?.[index]?.option && (

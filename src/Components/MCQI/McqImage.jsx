@@ -13,11 +13,11 @@ function McqImage({ formik }) {
     const addOption = () => {
         if (formik.values.options.length == 0) {
             const newOptions = [...formik.values.options, {
-                option: "",
+                optionImageUrl: "",
                 mark: 0,
                 isCorrect: false
             }, {
-                option: "",
+                optionImageUrl: "",
                 mark: 0,
                 isCorrect: false
             }];
@@ -26,7 +26,7 @@ function McqImage({ formik }) {
         }
         else {
             const newOptions = [...formik.values.options, {
-                option: "",
+                optionImageUrl: "",
                 mark: 0,
                 isCorrect: false
             }];
@@ -39,13 +39,13 @@ function McqImage({ formik }) {
         const updatedOptions = formik.values.options.map((opt, idx) => ({
             ...opt,
             isCorrect: idx === correctAnswer,
-            mark:idx === correctAnswer ? 10 :0
+            mark: idx === correctAnswer ? 10 : 0
 
         }));
         formik.setFieldValue("options", updatedOptions);
 
 
-        
+
     }, [correctAnswer]);
 
 
@@ -64,13 +64,18 @@ function McqImage({ formik }) {
                 </svg>
             </div>
 
-            <div className='grid md:grid-cols-2 gap-6'>
-
+            <div className="grid lg:grid-cols-2 gap-6">
                 {formik.values.options.map((opt, index) => (
-                    <McqImageOptionsCard key={index} formik={formik} index={index} correctAnswer={correctAnswer} setCorrectAnswer={setCorrectAnswer}></McqImageOptionsCard>
+                    <McqImageOptionsCard
+                        key={index}
+                        formik={formik}
+                        index={index}
+                        correctAnswer={correctAnswer}
+                        setCorrectAnswer={setCorrectAnswer}
+                    />
                 ))}
-
             </div>
+
 
 
         </div>
