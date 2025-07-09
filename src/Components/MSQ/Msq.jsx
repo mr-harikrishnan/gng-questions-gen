@@ -41,7 +41,7 @@ function Msq({ formik }) {
     return (
 
         <div>
-            <h1 className='text-sm text-gray-500 my-2'>MSQ</h1>
+            <h1 className='text-sm text-gray-500 my-2'>MSQ type options</h1>
             <div className='flex justify-end'>
                 <svg onClick={addOption} xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 24 24" strokeWidth="1.5" stroke="gray" className="size-6 cursor-pointer hover:scale-120">

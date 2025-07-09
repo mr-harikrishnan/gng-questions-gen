@@ -49,8 +49,8 @@ function Mcq({ formik }) {
 
 
     return (
-        <div>
-            <h1 className='text-sm text-gray-500 my-2'>MCQ</h1>
+        <div >
+            <h1 className='text-sm text-gray-500 my-2'>MCQ type options</h1>
 
             <div
 
