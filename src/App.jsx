@@ -116,11 +116,17 @@ function App() {
 
 
       }
-
     })
 
-
   }
+ 
+  const addNewTag=(tags)=>{
+    const seperateTags=tags.match(/#\w+/g);
+    console.log(seperateTags)
+    formik.setFieldValue("tags",seperateTags)
+  }
+
+
 
 
 
@@ -253,8 +259,11 @@ function App() {
             <label className='text-sm text-gray-500 my-2' >Tag</label>
             <input
               name='tags'
-              value={formik.values.tags}
-              onChange={formik.handleChange}
+              
+              onChange={(e) => {
+                formik.handleChange(e)
+                addNewTag(e.target.value)
+              }}
               onBlur={formik.handleBlur} type="text"
               placeholder='Add your tags'
               className='border-1 pl-2 h-9  placeholder-gray-400 rounded-lg border-gray-400 bg-[#ebf8f8] hover:bg-[#d3f0f3]'
