@@ -13,11 +13,11 @@ function McqImage({ formik }) {
     const addOption = () => {
         if (formik.values.options.length == 0) {
             const newOptions = [...formik.values.options, {
-                optionImageUrl: "",
+                option: "",
                 mark: 10,
                 isCorrect: false
             }, {
-                optionImageUrl: "",
+                option: "",
                 mark: 0,
                 isCorrect: false
             }];
@@ -26,7 +26,7 @@ function McqImage({ formik }) {
         }
         else {
             const newOptions = [...formik.values.options, {
-                optionImageUrl: "",
+                option: "",
                 mark: 0,
                 isCorrect: false
             }];

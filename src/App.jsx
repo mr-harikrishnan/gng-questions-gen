@@ -52,8 +52,7 @@ function App() {
       const errors = {};
       console.log(errors)
 
-      console.log(errors)
-      console.log(values)
+
       // Question
       if (!values.question || values.question.trim().length < 5) {
         errors.question = "Please enter minimum 5 letters";
@@ -84,9 +83,20 @@ function App() {
 
           }
         }
-        optionErrors.push(err)
+
+        // Only push if there is actually an error
+        if (Object.keys(err).length > 0) {
+          optionErrors.push(err);
+        } else {
+          optionErrors.push(null); // or undefined if preferred
+        }
       });
-      errors.options = optionErrors;
+
+      // Add option errors only if there's any
+      if (optionErrors.some((e) => e)) {
+        errors.options = optionErrors;
+      }
+
 
       return errors;
     }

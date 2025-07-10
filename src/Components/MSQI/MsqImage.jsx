@@ -5,7 +5,7 @@ import MsqImageOptionsCard from './MsqImageOptionsCard';
 
 function MsqImage({ formik }) {
 
-    const [correctAnswer, setCorrectAnswer] = useState([0,1])
+    const [correctAnswer, setCorrectAnswer] = useState([0])
 
 
     const addOption = () => {
