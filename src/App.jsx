@@ -1,5 +1,4 @@
 import React, { Suspense, useState } from 'react'
-
 import { Formik, useFormik } from 'formik'
 import CodeEditor from './Components/Code-Editor/CodeEditor'
 import DragAndDrop from './Components/Drag-And-Drop/DragAndDrop'
@@ -10,11 +9,13 @@ import MCQ from './assets/MCQ.png'
 import MSQ from './assets/MSQ.png'
 import MCQI from './assets/MCQI.png'
 import MSQI from './assets/MSQI.png'
+import NTQ from './assets/NTQ.png'
 
 const Mcq = React.lazy(() => import('./Components/MCQ/Mcq'))
 const Msq = React.lazy(() => import('./Components/MSQ/Msq'))
 const McqImage = React.lazy(() => import('./Components/MCQI/McqImage'))
 const MsqImage = React.lazy(() => import('./Components/MSQI/MsqImage'))
+const Ntq = React.lazy(() => import('./Components/NTQ/Ntq'))
 
 
 function App() {
@@ -38,9 +39,6 @@ function App() {
   const [code, setCode] = useState("Write your Code...")
   const [subject, setSubject] = useState("science")
   const [topics, setTopics] = useState(["Physics", "Chemistry", "Biology"])
-
-
-
 
 
   const formik = useFormik({
@@ -129,11 +127,11 @@ function App() {
   }
 
   const addNewTag = (tags) => {
-  if (tags.includes(",")) {
-    let newTags = tags.split(",").map(tag => tag.trim()); // clean whitespace
-    formik.setFieldValue("tags", [ ...newTags]);
+    if (tags.includes(",")) {
+      let newTags = tags.split(",").map(tag => tag.trim()); // clean whitespace
+      formik.setFieldValue("tags", [...newTags]);
+    }
   }
-}
 
 
 
@@ -243,6 +241,7 @@ function App() {
             <Suspense fallback={<div>Loading...</div>}> {formik.values.questionsType == "msq" ? <Msq formik={formik}></Msq> : null} </Suspense>
             <Suspense fallback={<div>Loading...</div>}> {formik.values.questionsType == "mcqImage" ? <McqImage formik={formik}></McqImage> : null} </Suspense>
             <Suspense fallback={<div>Loading...</div>}> {formik.values.questionsType == "msqImage" ? <MsqImage formik={formik}></MsqImage> : null} </Suspense>
+            <Suspense fallback={<div>Loading...</div>}> {formik.values.questionsType == "ntq" ? <Ntq formik={formik}></Ntq> : null} </Suspense>
 
           </div>
 
@@ -311,7 +310,8 @@ function App() {
               formik.setFieldValue("questionsType", "mcq")
             }
           }
-        }} src={MCQ} className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
+        }} src={MCQ} className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt=""
+        />
 
 
 
@@ -327,7 +327,8 @@ function App() {
           }
         }
 
-        } src={MSQ} className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
+        } src={MSQ} className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt=""
+        />
 
 
 
@@ -343,7 +344,8 @@ function App() {
 
         }
 
-        } src={MCQI} className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
+        } src={MCQI} className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt=""
+        />
 
 
 
@@ -361,7 +363,25 @@ function App() {
 
         }
 
-        } src={MSQI} className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
+        } src={MSQI} className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt=""
+        />
+
+        {/* ntq*/}
+        <img onClick={() => {
+          if (formik.values.questionsType != "ntq") {
+            const permission = window.confirm("Switching options will clear the previous options. Continue?");
+            if (permission) {
+              formik.setFieldValue("options", [])
+              formik.setFieldValue("questionsType", "ntq")
+            }
+          }
+
+        }
+
+        } src={NTQ} className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt=""
+        />
+
+
 
       </div>
 
