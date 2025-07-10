@@ -16,7 +16,7 @@ function MsqOptionsCard({ formik, index, correctAnswer, setCorrectAnswer }) {
 
     const toggleCorrectAnswer = (idx) => {
         if (correctAnswer.includes(idx)) {
-            setCorrectAnswer(correctAnswer.filter(ans => ans !== i));
+            setCorrectAnswer(correctAnswer.filter(ans => ans !== idx));
         } else {
             setCorrectAnswer([...correctAnswer, idx]);
         }

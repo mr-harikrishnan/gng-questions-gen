@@ -7,7 +7,7 @@ function OptionsDragAndDrop({ formik, index }) {
 
     const onDrop = useCallback((acceptedFiles) => {
         const file = acceptedFiles[0];
-        formik.setFieldValue(`options[${index}].optionImageUrl`, URL.createObjectURL(file));
+        formik.setFieldValue(`options[${index}].option`, URL.createObjectURL(file));
         setPreview(URL.createObjectURL(file));
 
     }, [formik]);

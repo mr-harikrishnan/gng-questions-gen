@@ -5,17 +5,17 @@ import MsqImageOptionsCard from './MsqImageOptionsCard';
 
 function MsqImage({ formik }) {
 
-    const [correctAnswer, setCorrectAnswer] = useState([0])
+    const [correctAnswer, setCorrectAnswer] = useState([0,1])
 
 
     const addOption = () => {
         if (formik.values.options.length == 0) {
             const newOptions = [...formik.values.options, {
-                optionImageUrl: "",
+                option: "",
                 mark: 10,
                 isCorrect: false
             }, {
-                optionImageUrl: "",
+                option: "",
                 mark: 0,
                 isCorrect: false
             }];
@@ -24,7 +24,7 @@ function MsqImage({ formik }) {
         }
         else {
             const newOptions = [...formik.values.options, {
-                optionImageUrl: "",
+                option: "",
                 mark: 0,
                 isCorrect: false
             }];
@@ -36,12 +36,11 @@ function MsqImage({ formik }) {
     useEffect(() => {
         const updatedOptions = formik.values.options.map((opt, idx) => ({
             ...opt,
-            isCorrect: idx === correctAnswer,
-            mark: idx === correctAnswer ? 10 : 0
+            isCorrect: correctAnswer.includes(idx),
+            mark: correctAnswer.includes(idx) ? 10 : 0
 
         }));
         formik.setFieldValue("options", updatedOptions);
-
 
 
     }, [correctAnswer]);
@@ -49,7 +48,7 @@ function MsqImage({ formik }) {
 
     return (
         <div>
-            <h1 className='text-sm font-semibold text-gray-500 my-2'>MSQ type image option</h1>
+            <h1 className='text-sm font text-gray-500 my-2'>MSQ type image option</h1>
 
             <div
 

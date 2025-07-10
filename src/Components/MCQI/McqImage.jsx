@@ -51,7 +51,7 @@ function McqImage({ formik }) {
 
     return (
         <div>
-            <h1 className='text-sm font-semibold text-gray-500 my-2'>MCQ type image option</h1>
+            <h1 className='text-sm  text-gray-500 my-2'>MCQ type image option</h1>
 
             <div
 

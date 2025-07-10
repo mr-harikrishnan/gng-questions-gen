@@ -44,7 +44,7 @@ function MsqImageOptionsCard({ formik, index, correctAnswer, setCorrectAnswer })
             <div className='flex md:items-center flex-col gap-2 md:flex-row' >
                 <div
                     onClick={() => { toggleCorrectAnswer(index) }}
-                    className={`${correctAnswer === index
+                    className={`${correctAnswer.includes(index)
                         ? "bg-[#71C9CE] justify-end"
                         : "bg-gray-200 justify-start"} border flex items-center border-gray-100 h-7 rounded-3xl max-w-12 md:min-w-12 py-1`}>
                     <div className='border border-gray-300 bg-white h-5.5 w-5.5 rounded-3xl ml-1 '></div>
@@ -57,8 +57,8 @@ function MsqImageOptionsCard({ formik, index, correctAnswer, setCorrectAnswer })
                         <OptionsDragAndDrop formik={formik} index={index}></OptionsDragAndDrop>
                     </div>
 
-                    {formik.touched.options?.[index]?.optionImageUrl && formik.errors.options?.[index]?.optionImageUrl && (
-                        <span className="text-red-500 text-sm">{formik.errors.options[index].optionImageUrl}</span>
+                    {formik.touched.options?.[index]?.option && formik.errors.options?.[index]?.option && (
+                        <span className="text-red-500 text-sm">{formik.errors.options[index].option}</span>
                     )}
 
 
