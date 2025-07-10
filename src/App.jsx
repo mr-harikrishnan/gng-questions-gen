@@ -58,7 +58,7 @@ function App() {
     validate: (values) => {
 
       const errors = {};
-    
+
 
 
       // Question
@@ -129,10 +129,13 @@ function App() {
   }
 
   const addNewTag = (tags) => {
-    const seperateTags = tags.match(/#\w+/g);
-    console.log(seperateTags)
-    formik.setFieldValue("tags", seperateTags)
+  if (tags.includes(",")) {
+    let newTags = tags.split(",").map(tag => tag.trim()); // clean whitespace
+    formik.setFieldValue("tags", [ ...newTags]);
   }
+}
+
+
 
 
 

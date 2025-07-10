@@ -6,45 +6,43 @@ function Mcq({ formik }) {
 
     const [correctAnswer, setCorrectAnswer] = useState(0)
 
+    useEffect(() => {
+        if (formik.values.options.length === 0) {
+            const newOptions = [
+                { option: "", mark: 10, isCorrect: true },
+                { option: "", mark: 0, isCorrect: false }
+            ];
+            formik.setFieldValue("options", newOptions);
+            setCorrectAnswer(0);
+        }
+    }, [formik.values.options]);
+
 
 
 
     const addOption = () => {
-        if (formik.values.options.length == 0) {
-            const newOptions = [...formik.values.options, {
-                option: "",
-                mark: 10,
-                isCorrect: false
-            }, {
-                option: "",
-                mark: 0,
-                isCorrect: false
-            }];
 
-            formik.setFieldValue("options", newOptions);
-        }
-        else {
-            const newOptions = [...formik.values.options, {
-                option: "",
-                mark: 0,
-                isCorrect: false
-            }];
-            formik.setFieldValue("options", newOptions);
-        }
-
+        const newOptions = [...formik.values.options, {
+            option: "",
+            mark: 0,
+            isCorrect: false
+        }];
+        formik.setFieldValue("options", newOptions);
     }
+
+
 
     useEffect(() => {
         const updatedOptions = formik.values.options.map((opt, idx) => ({
             ...opt,
             isCorrect: idx === correctAnswer,
-            mark:idx === correctAnswer ? 10 :0
+            mark: idx === correctAnswer ? 10 : 0
 
         }));
         formik.setFieldValue("options", updatedOptions);
 
 
-        
+
     }, [correctAnswer]);
 
 
