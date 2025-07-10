@@ -301,7 +301,7 @@ function App() {
               formik.setFieldValue("questionsType", "mcq")
             }
           }
-        }} src="/src/assets/MCQ.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
+        }} src="/assets/MCQ.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
 
 
 
@@ -317,7 +317,7 @@ function App() {
           }
         }
 
-        } src="/src/assets//MSQ.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
+        } src="/assets//MSQ.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
 
 
 
@@ -333,7 +333,7 @@ function App() {
 
         }
 
-        } src="/src/assets/MCQI.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
+        } src="/assets/MCQI.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
 
 
 
@@ -351,7 +351,7 @@ function App() {
 
         }
 
-        } src="/src/assets//MSQI.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
+        } src="/assets/MSQI.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
 
       </div>
 
