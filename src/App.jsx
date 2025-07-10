@@ -1,12 +1,20 @@
-import React, { useState } from 'react'
-import Mcq from './Components/MCQ/Mcq'
+import React, { Suspense, useState } from 'react'
+
 import { Formik, useFormik } from 'formik'
 import CodeEditor from './Components/Code-Editor/CodeEditor'
 import DragAndDrop from './Components/Drag-And-Drop/DragAndDrop'
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
-import Msq from './Components/MSQ/Msq'
-import McqImage from './Components/MCQI/McqImage'
-import MsqImage from './Components/MSQI/MsqImage'
+
+
+import MCQ from './assets/MCQ.png'
+import MSQ from './assets/MSQ.png'
+import MCQI from './assets/MCQI.png'
+import MSQI from './assets/MSQI.png'
+
+const Mcq = React.lazy(() => import('./Components/MCQ/Mcq'))
+const Msq = React.lazy(() => import('./Components/MSQ/Msq'))
+const McqImage = React.lazy(() => import('./Components/MCQI/McqImage'))
+const MsqImage = React.lazy(() => import('./Components/MSQI/MsqImage'))
 
 
 function App() {
@@ -50,7 +58,7 @@ function App() {
     validate: (values) => {
 
       const errors = {};
-      console.log(errors)
+    
 
 
       // Question
@@ -119,11 +127,11 @@ function App() {
     })
 
   }
- 
-  const addNewTag=(tags)=>{
-    const seperateTags=tags.match(/#\w+/g);
+
+  const addNewTag = (tags) => {
+    const seperateTags = tags.match(/#\w+/g);
     console.log(seperateTags)
-    formik.setFieldValue("tags",seperateTags)
+    formik.setFieldValue("tags", seperateTags)
   }
 
 
@@ -228,11 +236,10 @@ function App() {
 
 
           <div>
-
-            {formik.values.questionsType == "mcq" ? <Mcq formik={formik} ></Mcq> : null}
-            {formik.values.questionsType == "msq" ? <Msq formik={formik}></Msq> : null}
-            {formik.values.questionsType == "mcqImage" ? <McqImage formik={formik}></McqImage> : null}
-            {formik.values.questionsType == "msqImage" ? <MsqImage formik={formik}></MsqImage> : null}
+            <Suspense fallback={<div>Loading...</div>}> {formik.values.questionsType == "mcq" ? <Mcq formik={formik} ></Mcq> : null} </Suspense>
+            <Suspense fallback={<div>Loading...</div>}> {formik.values.questionsType == "msq" ? <Msq formik={formik}></Msq> : null} </Suspense>
+            <Suspense fallback={<div>Loading...</div>}> {formik.values.questionsType == "mcqImage" ? <McqImage formik={formik}></McqImage> : null} </Suspense>
+            <Suspense fallback={<div>Loading...</div>}> {formik.values.questionsType == "msqImage" ? <MsqImage formik={formik}></MsqImage> : null} </Suspense>
 
           </div>
 
@@ -259,7 +266,7 @@ function App() {
             <label className='text-sm text-gray-500 my-2' >Tag</label>
             <input
               name='tags'
-              
+
               onChange={(e) => {
                 formik.handleChange(e)
                 addNewTag(e.target.value)
@@ -301,7 +308,7 @@ function App() {
               formik.setFieldValue("questionsType", "mcq")
             }
           }
-        }} src="/assets/MCQ.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
+        }} src={MCQ} className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
 
 
 
@@ -317,7 +324,7 @@ function App() {
           }
         }
 
-        } src="/assets//MSQ.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
+        } src={MSQ} className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
 
 
 
@@ -333,7 +340,7 @@ function App() {
 
         }
 
-        } src="/assets/MCQI.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
+        } src={MCQI} className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
 
 
 
@@ -351,7 +358,7 @@ function App() {
 
         }
 
-        } src="/assets/MSQI.png" className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
+        } src={MSQI} className='h-10 w-10 cursor-pointer hover:border-3  hover:border-[#71C9CE] rounded border border-gray-300 mx-auto' alt="" />
 
       </div>
 
