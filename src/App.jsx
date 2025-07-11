@@ -88,7 +88,19 @@ function App() {
             err.option = "Please add image in your option";
 
           }
+
+          if (values.questionsType == "ntq") {
+            if (!values.options[0].min) {
+              err.min = "Please enter minimum values";
+            }
+            if (!values.options[0].max) {
+              err.max = "Please enter maximum values";
+            }
+          }
+
         }
+
+
 
         // Only push if there is actually an error
         if (Object.keys(err).length > 0) {
