@@ -73,42 +73,46 @@ function App() {
       if (values.tags.length < 2) {
         errors.tags = "Please enter minimum 2 tags ";
       }
+      //min
+      if (!values.min) {
+        errors.min = "Please enter minimum value";
+      }
+      //max
+      if (!values.max) {
+        errors.max = "Please enter miaximum value";
+      }
+
+
+
 
       const optionErrors = []
       // Options Validation
-      values.options.map((opt) => {
-        const err = {};
 
-        if (!opt.option || opt.option.trim() === "") {
-          if (values.questionsType == "mcq" || values.questionsType == "msq") {
-            err.option = "Please enter option";
-          }
+      if (values.questionsType != 'ntq') {
+        values.options.map((opt) => {
+          const err = {};
 
-          if (values.questionsType == "mcqImage" || values.questionsType == "msqImage") {
-            err.option = "Please add image in your option";
-
-          }
-
-          if (values.questionsType == "ntq") {
-            if (!values.options[0].min) {
-              err.min = "Please enter minimum values";
+          if (!opt.option || opt.option.trim() === "") {
+            if (values.questionsType == "mcq" || values.questionsType == "msq") {
+              err.option = "Please enter option";
             }
-            if (!values.options[0].max) {
-              err.max = "Please enter maximum values";
+
+            if (values.questionsType == "mcqImage" || values.questionsType == "msqImage") {
+              err.option = "Please add image in your option";
+
             }
+
           }
 
-        }
+          // Only push if there is actually an error
+          if (Object.keys(err).length > 0) {
+            optionErrors.push(err);
+          } else {
+            optionErrors.push(null); // or undefined if preferred
+          }
+        });
+      }
 
-
-
-        // Only push if there is actually an error
-        if (Object.keys(err).length > 0) {
-          optionErrors.push(err);
-        } else {
-          optionErrors.push(null); // or undefined if preferred
-        }
-      });
 
       // Add option errors only if there's any
       if (optionErrors.some((e) => e)) {
@@ -120,8 +124,13 @@ function App() {
     }
     ,
     onSubmit: (values) => {
-      console.log(values)
+      if (values.questionsType !== 'ntq') {
+        delete values.min;
+        delete values.max;
+      }
+      console.log(values);
     }
+
 
 
   })
